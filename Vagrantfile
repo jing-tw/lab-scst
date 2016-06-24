@@ -12,12 +12,14 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/wily64"
+  # config.vm.box = "ubuntu/wily64"
+  # config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/trusty64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  config.vm.box_check_update = false
+  # config.vm.box_check_update = true
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -49,6 +51,18 @@ Vagrant.configure(2) do |config|
   #
   #   # Customize the amount of memory on the VM:
      vb.memory = "2048"
+  #   vb.name = "lab_scst_gateway_vm1_v2"
+
+     file_to_disk = './tmp/large_disk.vdi'
+     unless File.exist?(file_to_disk)
+        vb.customize ['createhd', '--filename', file_to_disk, '--size', 500 * 1024]
+     end
+     
+     # my_storage_controller='SCSI Controller'
+     my_storage_controller = 'SATAController'
+     
+     vb.customize ['storageattach', :id, '--storagectl',my_storage_controller, '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+
    end
   #
   # View the documentation for the provider you are using for more
