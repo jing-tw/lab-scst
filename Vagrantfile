@@ -12,9 +12,10 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "ubuntu/wily64"
-  # config.vm.box = "ubuntu/xenial64"
-  config.vm.box = "ubuntu/trusty64"
+  # config.vm.box = "ubuntu/wily64" # ok
+  # config.vm.box = "ubuntu/xenial64" # ubuntu/xenial name resolving issue
+   config.vm.box = "ubuntu/trusty64" # 14.04 linux kernel version issue
+  # config.vm.box = "ubuntu/yakkety64" #16.10 boot issue
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

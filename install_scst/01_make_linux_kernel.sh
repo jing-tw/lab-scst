@@ -35,5 +35,16 @@ cd ~/orabuntu-lxc/scst-files
 cd ~/orabuntu-lxc/scst-files
 . ./create-scst-1c.sh 
 
+################
+# PATCH
+# for Ubuntu 14.04 (Linux kernel: 3.13)
+# Add the following code in ~/Downloads/linux-3.13.0/drivers/scst/scst_targ.c
+# 
+# static inline bool ktime_before(const ktime_t cmp1, const ktime_t cmp2)
+# {
+#         return ktime_compare(cmp1, cmp2) < 0;
+# }
+################
+
 cd ~/orabuntu-lxc/scst-files
 . ./create-scst-1d.sh 
